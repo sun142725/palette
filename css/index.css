@@ -1,0 +1,148 @@
+*{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+.logo{
+    width:130px;
+    height:100px;
+    background:rgba(0,0,0,0.1);
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-right:2px solid black;
+    border-bottom:2px solid black;
+    text-align: center;
+    line-height: 30px;
+    padding:20px;
+}
+header{
+    width:calc(100% - 130px);
+    height:70px;
+    background:rgba(0,0,0,0.1);
+    line-height: 70px;
+    text-align: center;
+    font-size:48px;
+    float: left;
+}
+.con{
+    width:calc(100% - 130px);
+    height:30px;
+    float:left;
+    background:rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    padding-left:10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /*border-bottom: 1px solid black;*/
+    border-top: 1px solid black;
+    text-align: right;
+    padding-right:30px;
+}
+.con>span{
+    line-height: 30px;
+    font-size: 12px;
+    margin-left:10px;
+    cursor: pointer;
+}
+.palette{
+    width:100%;
+    position:absolute;
+    top:100px;
+    bottom:0;
+    /*background:blue;*/
+}
+.palette>.control{
+    width:130px;
+    height:100%;
+    background:rgba(0,0,0,0.1);
+    float: left;
+    border-right:2px solid black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding:10px 10px;
+}
+.palette>.control>label{
+    width:40px;
+    height:40px;
+    float:left;
+    margin-left:7px;
+    margin-right:7px;
+    margin-top:10px;
+    background:rgba(0,0,0,0.1);
+    text-align: center;
+    line-height: 40px;
+    font-size: 24px;
+    position: relative;
+    cursor: pointer;
+}
+.palette>.control>label:active{
+    background:#fff;
+}
+.palette>.control>label>span{
+    display: block;
+    position: absolute;
+    right:-5px;
+    bottom:-5px;
+    background:#fff;
+    font-size: 12px;
+    width:auto;
+    height:16px;
+    line-height: 16px;
+    opacity: 0;
+    transition: all 0.5s;
+}
+.palette>.control>label:hover span{
+    opacity: 0.8;
+}
+.palette>.control>label>input{
+    width:100%;
+    height:100%;
+}
+.palette>.control>span{
+    float: left;
+    width:100%;
+    height:2px;
+    background:black;
+    margin-top:10px;
+    float:left;
+}
+.palette>.draw{
+    width:calc(100% - 130px);
+    height:100%;
+    background: rgba(0,0,0,0.1);
+    float:right;
+    position: relative;
+}
+.palette>.draw>.mask{
+    width:100%;
+    height:100%;
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 99;
+}
+.palette>.draw i{
+    display: none;
+    text-align: center;
+    position: absolute;
+}
+.palette>.draw>canvas{
+    background: #ffffff;
+    border:1px solid black;
+    border-left:none;
+}
+.cutdiv{
+    position: absolute;
+    display: none;
+    border: 2px dashed #000000;
+}

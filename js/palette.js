@@ -30,7 +30,6 @@ Palette.prototype= {
             self.mask.onmousemove = function (e) {
                 let mx = e.offsetX, my = e.offsetY;
                 self.ctx.clearRect(0, 0, self.width, self.height);
-                console.log(self.width);
                 if (self.history.length > 0) {
                     self.ctx.putImageData(self.history[self.history.length - 1], 0, 0);
                 }
@@ -55,7 +54,7 @@ Palette.prototype= {
             self.mask.onmousemove = function (e) {
                 let mx = e.offsetX, my = e.offsetY;
                 self.ctx.clearRect(0, 0, self.width, self.height);
-                console.log(self.width);
+                // console.log(self.width);
                 if (self.history.length > 0) {
                     self.ctx.putImageData(self.history[self.history.length - 1], 0, 0);
                 }
@@ -110,7 +109,6 @@ Palette.prototype= {
                 }
                 self.init();
                 self.ctx.beginPath();
-                console.log(self.width);
                 self.ctx.arc(ox, oy, Math.abs(mx - ox), 0, 2 * Math.PI);
                 self.ctx.closePath();
                 self.ctx[self.type]();
@@ -480,14 +478,19 @@ Palette.prototype= {
 `
     },
     save:function(){
-        let data=this.obj.toDataURL('image.png').replace('data:image/png','data:image/png');
+        let data=this.obj.toDataURL('image.png').replace('data:image/png','data:stream/octet');
         location.href=data;
+        // window.open(data);
     },
     down:function(){
         // let data=this.obj.toDataURL('image.png').replace('data:image/png','data:stream/octet');
         // location.href=data;
-        let data=this.obj.toDataURL('image.png')
-        window.open(data);
+        let self = this;
+        // let data=self.obj.toDataURL('/image.png')
+        // console.log(data)
+        //
+        let data = 'http://baidu.com'
+        window.location='data'
     },
     revoke:function(){
         let self=this;

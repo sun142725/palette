@@ -20,7 +20,13 @@ html,body{
     border-bottom:2px solid black;
     text-align: center;
     line-height: 30px;
-    padding:20px;
+    overflow: hidden;
+}
+.logo img{
+    display: block;
+    width:100%;
+    transform: translate(0px,-20px);
+    opacity: 0.7;
 }
 header{
     width:calc(100% - 130px);

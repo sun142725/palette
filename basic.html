@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>basics revision</title>
+</head>
+<body>
+    <canvas id="drawing" width="400" height="400">A drawing of something</canvas>
+    <img style="width: 300px;" src="./bd_logo1.png" alt="">
+    <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+</html>
+<script>
+    var drawing = document.getElementById('drawing')
+    var ctx = drawing.getContext('2d')
+    console.log(ctx)
+    ctx.lineCap = 'butt'  //  butt没头/round圆头/square方头
+    ctx.fillStyle = "red"
+    ctx.strokeStyle = "#666"
+    // ctx.fillRect(0,0,10,10)
+    // ctx.strokeRect(10,10,10,10)
+    // ctx.clearRect(5,5,10,10)
+    ctx.lineWidth = '1'
+    ctx.fillStyle = "rgba(255,0,0,0.4)"
+    // ctx.lineCap = "square"
+    ctx.lineJoin = "bevel"   // round圆角/bevel斜角/miter斜接
+    // ctx.fillRect(20, 20, 50,50)
+    ctx.strokeStyle="rgba(0,0,255,0.5)"
+    // ctx.strokeRect(30,30, 100,100)
+    //  绘制路径
+    // -------------------------绘制表-----------------------
+    // ctx.beginPath()
+    // ctx.arc(100,100, 50, 0, 2*Math.PI, false)
+    // ctx.moveTo(145, 100)
+    // ctx.arc(100,100, 45, 0, 2*Math.PI, false)
+    // ctx.lineWidth = '1'
+    // ctx.moveTo(100, 100)
+    // ctx.lineTo(120, 100)
+    // ctx.moveTo(100, 100)
+    // ctx.lineTo(100, 70)
+    // console.log(ctx.isPointInPath(140, 100))
+    // ctx.closePath()
+    // ctx.stroke()
+    // //  isPointInPath   接受xy  用来判断路径被关闭前判断某一点是否在路径上
+    // ctx.beginPath()
+    // ctx.moveTo(100,100)
+    // //  clip 剪切
+    // // ctx.arcTo(130, 150, 200, 200, 50)
+    // // ctx.bezierCurveTo(130,130,120, 140, 50, 160)
+    // // ctx.quadraticCurveTo(130,130, 100, 160)
+    // // ctx.closePath()
+    // ctx.stroke()
+    // ctx.font="bold 10px 黑体"
+    // ctx.textAlign="center"
+    // ctx.textBaseline="middle"
+    // ctx.strokeText('12', 100, 60)
+    // ctx.strokeText('3', 140, 100)
+    // ctx.strokeText('6', 100, 140)
+    // ctx.strokeText('9', 60, 100)
+    // ctx.strokeText('1', 100 + Math.sin(2*Math.PI/360*30) * 40, 100 - Math.cos(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('2', 100 + Math.cos(2*Math.PI/360*30) * 40, 100 - Math.sin(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('4', 100 + Math.cos(2*Math.PI/360*30) * 40, 100 + Math.sin(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('5', 100 + Math.sin(2*Math.PI/360*30) * 40, 100 + Math.cos(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('7', 100 - Math.sin(2*Math.PI/360*30) * 40, 100 + Math.cos(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('8', 100 - Math.cos(2*Math.PI/360*30) * 40, 100 + Math.sin(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('10', 100 - Math.cos(2*Math.PI/360*30) * 40, 100 - Math.sin(2*Math.PI/360*30) * 40)
+    // ctx.strokeText('11', 100 - Math.sin(2*Math.PI/360*30) * 40, 100 - Math.cos(2*Math.PI/360*30) * 40)
+    //------------------------------会动的表------------------------
+    ctx.translate(300, 100)
+    var minuteLen = 25,
+        secondLen = 35,
+        hoursLen = 15
+    // getTime()
+    function getTime(ctx) {
+        var date = new Date()
+        var hours = date.getHours(),
+            minute = date.getMinutes(),
+            second = date.getSeconds()
+            hours = hours >= 12 ? hours-12 : hours
+            var position = 0 < hours <= 3 ? 0 : 3 < hours <= 6 ? 1 : 6 < hours <= 9 ? 2 : 3
+        // console.log(hours, minute, second, position)
+        return {
+            hours,
+            minute,
+            second,
+            position
+        }
+    }
+    function getPositionIndex(time){
+        return 0 < time <= 3 ? 0 : 3 < time <= 6 ? 1 : 6 < time <= 9 ? 2 : 3
+    }
+    function drawText(){
+        ctx.font="bold 10px 黑体"
+        ctx.textAlign="center"
+        ctx.textBaseline="middle"
+        ctx.strokeText('12', 0, -40)
+        ctx.strokeText('3', 40, 0)
+        ctx.strokeText('6', 0, 40)
+        ctx.strokeText('9', -40, 0)
+        ctx.strokeText('1', 0 + Math.sin(2*Math.PI/360*30) * 40, 0 - Math.cos(2*Math.PI/360*30) * 40)
+        ctx.strokeText('2', 0 + Math.cos(2*Math.PI/360*30) * 40, 0 - Math.sin(2*Math.PI/360*30) * 40)
+        ctx.strokeText('4', 0 + Math.cos(2*Math.PI/360*30) * 40, 0 + Math.sin(2*Math.PI/360*30) * 40)
+        ctx.strokeText('5', 0 + Math.sin(2*Math.PI/360*30) * 40, 0 + Math.cos(2*Math.PI/360*30) * 40)
+        ctx.strokeText('7', 0 - Math.sin(2*Math.PI/360*30) * 40, 0 + Math.cos(2*Math.PI/360*30) * 40)
+        ctx.strokeText('8', 0 - Math.cos(2*Math.PI/360*30) * 40, 0 + Math.sin(2*Math.PI/360*30) * 40)
+        ctx.strokeText('10', 0 - Math.cos(2*Math.PI/360*30) * 40, 0 - Math.sin(2*Math.PI/360*30) * 40)
+        ctx.strokeText('11', 0 - Math.sin(2*Math.PI/360*30) * 40, 0 - Math.cos(2*Math.PI/360*30) * 40)
+    }
+    function draw(){
+        ctx.clearRect(-100,-100,drawing.width,drawing.height);
+        ctx.beginPath()
+        ctx.arc(0, 0, 50, 0, 2*Math.PI, false)
+        ctx.moveTo(45, 0)
+        ctx.arc(0, 0, 45, 0, 2*Math.PI, false)
+        // ctx.moveTo(0,0)
+        // ctx.lineTo(0,-35)
+        lineSecond()
+        // ctx.moveTo(0,0)
+        // ctx.lineTo(25, 0)
+        lineMinute()
+        lineHours()
+        // ctx.moveTo(0,0)
+        // ctx.lineTo(0, 15)
+        // ctx.stroke()
+        drawText()
+    }
+    function lineSecond(){
+        var { hours, minute, second, position } = getTime()
+        var {x , y} = getPosition(second/60*360, secondLen)
+        ctx.moveTo(0,0)
+        ctx.lineTo(x,y)
+        ctx.stroke()
+    }
+    function lineMinute(){
+        var { hours, minute, second, position } = getTime()
+        var {x , y} = getPosition((minute + second/60)/60*360, minuteLen)
+        ctx.moveTo(0,0)
+        ctx.lineTo(x,y)
+        ctx.stroke()
+    }
+    function lineHours(){
+        var { hours, minute, second, position } = getTime()
+        var {x , y} = getPosition((hours + minute/60 + second/60/60)/12*360, hoursLen)
+        ctx.moveTo(0,0)
+        ctx.lineTo(x,y)
+        ctx.stroke()
+    }
+    function getPosition(angle, len){
+        var x, y
+        // switch (index) {
+        //     case 0:
+        //         x = Math.sin(2*Math.PI/360 * angle) * len;
+        //         y = -Math.cos(2*Math.PI/360 * angle) * len;
+        //         break;
+        //     case 1:
+        //         x = Math.cos(2*Math.PI/360 * (angle - 90)) * len;
+        //         y = Math.sin(2*Math.PI/360 * (angle - 90)) * len;
+        //         break;
+        //     case 2:
+        //         x = -Math.sin(2*Math.PI/360 * (angle - 180)) * len;
+        //         y = Math.cos(2*Math.PI/360 * (angle - 180)) * len;
+        //         break;
+        //     case 3:
+        //         x = -Math.cos(2*Math.PI/360 * (angle - 270)) * len;
+        //         y = -Math.sin(2*Math.PI/360 * (angle - 270)) * len;
+        //         break;
+        // }
+        x = Math.sin(2*Math.PI/360 * angle) * len;
+        y = -Math.cos(2*Math.PI/360 * angle) * len;
+        // console.log(x, y)
+        return {x, y}
+    }
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                    window.setTimeout(callback, 1000 / 60);
+                };
+    })();
+
+
+    function run(){
+        draw()
+        requestAnimationFrame(run)
+    }
+    run()
+    //  绘制图像
+    var canvas = document.getElementById('canvas')
+    var ctx2 = canvas.getContext('2d')
+    var image= document.getElementsByTagName('img')[0]
+    console.log(image)
+    // setTimeout(()=>ctx2.drawImage(image, 0, 0, 200, 500, 0, 0, 50, 1000), 3000)
+    ctx2.shadowColor = 'rgba(0,255,0,0.5)'
+    ctx2.shadowOffsetX = '0'
+    ctx2.shadowOffsetY = '10'
+    ctx2.shadowBlur = 10
+    ctx2.fillStyle = 'red'
+    ctx2.fillRect(10,10, 100,100)
+    ctx2.fillStyle = 'yellow'
+    ctx2.fillRect(10, 120, 100, 100)
+        //  渐变
+    var gradient = ctx2.createLinearGradient(120, 120, 240, 240)
+    gradient.addColorStop(0, 'white')
+    gradient.addColorStop(0.5, 'yellow')
+    gradient.addColorStop(1, 'red')
+    ctx2.fillStyle = gradient
+    ctx2.fillRect(120, 120, 120, 120)
+    ctx2.globalAlpha = 0.5;
+    var radialGradient = ctx2.createRadialGradient(120, 300, 50, 250, 120, 50)
+    radialGradient.addColorStop(0, 'yellow')
+    // radialGradient.addColorStop(0.3, 'white')
+    radialGradient.addColorStop(1, 'red')
+    ctx2.fillStyle = radialGradient
+    ctx2.beginPath()
+    ctx2.arc(120, 250, 100, 0, 2*Math.PI, false)
+    ctx2.fill()
+    setTimeout(()=>{
+        var pattern = ctx2.createPattern(image, 'repeat')
+        ctx2.fillStyle = pattern
+        ctx2.fillRect(240, 100, 100, 200)
+    }, 1000)
+    ctx2.fillRect(0,0,100, 100)
+    ctx2.globalAlpha = 0
+    AshPlacing(ctx2)
+    function AshPlacing(ctx){
+        var imageData = ctx.getImageData(0,0,canvas.width, canvas.height)
+        let data = imageData.data
+        for(let i=0; i<data.length;i+=4){
+            r = data[i]
+            g = data[i+1]
+            b = data[i+2]
+            a = data[i+3]
+            average = Math.floor((r + g + b)/3)
+            data[i] = average
+            data[i+1] = average
+            data[i+2] = average
+            data[i+4] = 1
+        }
+        imageData.data = data
+        ctx.putImageData(imageData, 0,0)
+    }
+</script>
